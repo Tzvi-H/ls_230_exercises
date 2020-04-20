@@ -1,15 +1,19 @@
-function colorGeneration(generationNumber) {
-  if (generationNumber < 1) {
-    return;
+function nodeSwap(id1, id2) {
+  let node1 = document.getElementById(id1);
+  let node2 = document.getElementById(id2);
+  
+  if (!node1 || !node2) {
+    return undefined;
   }
 
-  let nodes = Array.from(document.body.children);
-  let currentLevel = 1;
+  // check that they are not children
 
-  while (currentLevel < generationNumber) {
-    nodes = nodes.flatMap(node => Array.from(node.children));
-    currentLevel += 1;
-  }
+  let node1Clone = node1.clone(true);
+  let node2Clone = node2.clone(true);
 
-  nodes.forEach(node => node.classList.add('generation-color'));
-} 
+  node1.parentNode.replaceChild(node2Clone, node1);
+  node2.parentNode.replaceChild(node1Clone, node2);
+
+  return true;
+}
+
