@@ -1,18 +1,12 @@
-let main;
-let articles = [];
-let links = [];
-
 document.addEventListener('DOMContentLoaded', e => {
-  main = document.querySelector('main');
-  articles = Array.from(document.querySelectorAll('article'));
-  links = Array.from(document.querySelectorAll('li > a'));
-
   document.body.addEventListener('click', addHighlight);
 })
 
 function removeHighlight() {
-  main.classList.remove('highlight');
-  articles.forEach(article => article.classList.remove('highlight'));
+  let highlighted = document.querySelector('.highlight');
+  if (highlighted) {
+    highlighted.classList.remove('highlight');
+  }
 }
 
 function addHighlight(event) {
@@ -29,7 +23,7 @@ function calculateNode(target) {
   } else if (target.parentNode.tagName === 'ARTICLE') {
     node = target.parentNode;
   } else {
-    node = main;
+    node = document.querySelector('main');;
   }
   return node;
 }
